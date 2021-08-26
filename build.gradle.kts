@@ -14,17 +14,21 @@ repositories {
     google()
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+    maven {
+        url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        name = "Compose for Desktop DEV"
+    }
 }
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation( "com.arkivanov.decompose:decompose:0.3.1")
-    implementation("com.arkivanov.decompose:extensions-compose-jetbrains:0.3.1")
+    implementation("org.jetbrains.compose.material:material-icons-extended-desktop:1.0.0-alpha3")
     implementation("org.seleniumhq.selenium:selenium-java:3.141.59")
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
+    kotlinOptions.freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
 }
 
 compose.desktop {
