@@ -11,6 +11,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowSize
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import components.Answers
 import components.ConnectionChip
 import components.Settings
 import kotlinx.coroutines.Job
@@ -74,6 +75,7 @@ fun main() {
                             modifier = Modifier.padding(16.dp)
                         )
                         ConnectionChip(state = appState)
+                        Answers("Calcium ".repeat(100).split(" "))
                     }
                 }
             }
