@@ -3,14 +3,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.res.useResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import extension.asResourceFile
 import manager.ChromeDriverManager
 import manager.WordListManager
 import pages.AppContent
-import java.io.File
+import theme.DarkColors
+import theme.LightColors
 
 fun main() {
     val driver = ChromeDriverManager.DRIVER_NAME.asResourceFile
@@ -44,7 +44,9 @@ fun main() {
             onCloseRequest = ::exitApplication,
             title = "Bomb Party Assistant"
         ) {
-            MaterialTheme {
+            MaterialTheme(
+                colors = LightColors
+            ) {
                 Scaffold(scaffoldState = scaffoldState) {
                     Column {
                         TopAppBar(

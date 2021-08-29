@@ -50,7 +50,6 @@ fun NumberPicker(
                     }
                 }
             },
-//            isError = current == null,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.width(50.dp),
             decorationBox = { textField ->
@@ -62,7 +61,10 @@ fun NumberPicker(
                     textField()
                 }
             },
-            textStyle = MaterialTheme.typography.caption.copy(textAlign = TextAlign.Center)
+            textStyle = MaterialTheme.typography.caption.copy(
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.onSurface
+            )
         )
 
         IconButton(

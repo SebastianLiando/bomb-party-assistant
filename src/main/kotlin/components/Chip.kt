@@ -3,6 +3,7 @@ package components
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -48,6 +49,10 @@ fun ConnectionChip(state: AppState) {
     val modifier = Modifier.padding(vertical = 4.dp, horizontal = 12.dp)
 
     Chip(color = animatedColor) {
-        Text(chipText, modifier = modifier)
+        Text(
+            text = chipText,
+            color = Color.Black,
+            modifier = modifier
+        )
     }
 }

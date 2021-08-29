@@ -207,11 +207,13 @@ fun AppContent(
 
                     if (error is TimeoutException) {
                         scaffoldState.snackbarHostState.showSnackbar(
-                            "Timeout! Ensure that the room id is correct and you have stable connection."
+                            message = "Timeout! Ensure that the room id is correct and you have stable connection.",
+                            actionLabel = "OK"
                         )
                     }
 
                     appState = AppState.Disconnected(roomId)
+
                 }.collect {
                     appState = AppState.Connected(roomId, it)
                 }
@@ -261,6 +263,8 @@ fun AppContent(
         }
 
         Divider()
+
+        Spacer(Modifier.height(16.dp))
 
         AnswersSection(
             appState = appState,
