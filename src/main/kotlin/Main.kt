@@ -1,4 +1,5 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.DisposableEffect
@@ -45,7 +46,7 @@ fun main() {
             title = "Bomb Party Assistant"
         ) {
             MaterialTheme(
-                colors = LightColors
+                colors = if (isSystemInDarkTheme()) DarkColors else LightColors
             ) {
                 Scaffold(scaffoldState = scaffoldState) {
                     Column {
