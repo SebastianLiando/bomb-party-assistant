@@ -1,27 +1,26 @@
 package components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Remove
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import kotlin.math.max
-import kotlin.math.min
 
 @Composable
 fun NumberPicker(
@@ -51,7 +50,6 @@ fun NumberPicker(
                     }
                 }
             },
-//            isError = current == null,
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             modifier = Modifier.width(50.dp),
             decorationBox = { textField ->
@@ -63,7 +61,10 @@ fun NumberPicker(
                     textField()
                 }
             },
-            textStyle = MaterialTheme.typography.caption.copy(textAlign = TextAlign.Center)
+            textStyle = MaterialTheme.typography.caption.copy(
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.onSurface
+            )
         )
 
         IconButton(
