@@ -29,7 +29,9 @@ fun main() {
 
         DisposableEffect(driverManager) {
             onDispose {
-                driverManager.close()
+                if (driverManager.isDriverLoaded) {
+                    driverManager.close()
+                }
                 driver.delete()
                 println("Cleaned selenium driver")
             }

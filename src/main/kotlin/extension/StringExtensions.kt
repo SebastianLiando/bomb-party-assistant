@@ -6,7 +6,7 @@ import java.io.File
 val String.asResourceFile: File
     get() {
         return useResource(this) { stream ->
-            val file = File.createTempFile("this", "")
+            val file = File.createTempFile(this, "")
             println("Created temp file at ${file.absolutePath}")
             file.deleteOnExit()
 

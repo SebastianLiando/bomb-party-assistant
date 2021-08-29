@@ -10,7 +10,10 @@ import java.io.Closeable
 import java.io.File
 
 class ChromeDriverManager(private val executable: File) : Closeable {
+    var isDriverLoaded = false
     private val driver by lazy {
+        isDriverLoaded = true
+
         val service = ChromeDriverService.Builder()
             .usingDriverExecutable(executable)
             .usingAnyFreePort()
