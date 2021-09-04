@@ -15,3 +15,8 @@ realtime. This application is built using desktop compose.
 
 - Google Chrome version 92 and above
 - Java JDK 12
+
+## Features
+
+- If you prefer a shorter answer, you can reduce the maximum suggested word length
+- You can enable the settings to automatically copies the first suggested word to your clipboard
