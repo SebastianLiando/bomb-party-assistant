@@ -13,21 +13,28 @@ import pages.AppContent
 import theme.DarkColors
 import theme.LightColors
 
+const val DRIVER_EXE_NAME = "chromedriver.exe"
+const val WORD_LIST_FILE_NAME = "words.txt"
+
 fun main() {
-    val driver = ChromeDriverManager.DRIVER_NAME.asResourceFile
+    // Load the driver
+    val driver = DRIVER_EXE_NAME.asResourceFile
     val driverManager = ChromeDriverManager(driver)
 
-    val wordListFile = "words.txt".asResourceFile
+    // Load the word list.
+    val wordListFile = WORD_LIST_FILE_NAME.asResourceFile
     val wordList = wordListFile.readLines()
     wordListFile.delete()
     val wordsManager = WordListManager(wordList)
 
     application {
+        // Initial window state.
         val windowState = rememberWindowState(
             size = WindowSize(1000.dp, 600.dp),
             position = WindowPosition(Alignment.Center),
         )
 
+        // Clean up web driver when the application quits.
         DisposableEffect(driverManager) {
             onDispose {
                 if (driverManager.isDriverLoaded) {
@@ -48,18 +55,20 @@ fun main() {
             MaterialTheme(
                 colors = if (isSystemInDarkTheme()) DarkColors else LightColors
             ) {
-                Scaffold(scaffoldState = scaffoldState) {
-                    Column {
+                Scaffold(
+                    scaffoldState = scaffoldState,
+                    topBar = {
                         TopAppBar(
                             title = { Text("Bomb Party Assistant") },
                             elevation = 16.dp
                         )
-                        AppContent(
-                            driverManager = driverManager,
-                            wordsManager = wordsManager,
-                            scaffoldState = scaffoldState
-                        )
                     }
+                ) {
+                    AppContent(
+                        driverManager = driverManager,
+                        wordsManager = wordsManager,
+                        scaffoldState = scaffoldState
+                    )
                 }
             }
         }
