@@ -9,6 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import model.SettingsState
 
+/**
+ * Renders the UI for setting maximum word length.
+ *
+ * @param current The current maximum word length.
+ * @param onChanged Callback when the maximum word length needs to change.
+ */
 @Composable
 private fun MaxWordLengthSettings(current: Int?, onChanged: (Int?) -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -24,6 +30,12 @@ private fun MaxWordLengthSettings(current: Int?, onChanged: (Int?) -> Unit) {
     }
 }
 
+/**
+ * Renders the UI for setting copy first word to clipboard.
+ *
+ * @param copy Whether to automatically copy first word to clipboard
+ * @param onChanged Callback when the settings need to change.
+ */
 @Composable
 private fun CopyFirstToClipboardSettings(copy: Boolean, onChanged: (Boolean) -> Unit) {
     Row {
@@ -35,6 +47,13 @@ private fun CopyFirstToClipboardSettings(copy: Boolean, onChanged: (Boolean) -> 
     }
 }
 
+/**
+ * Renders the UI for settings.
+ *
+ * @param settings Current settings.
+ * @param onChanged Callback when the settings needs to be changed.
+ * @param modifier The modifier.
+ */
 @Composable
 fun Settings(
     settings: SettingsState,

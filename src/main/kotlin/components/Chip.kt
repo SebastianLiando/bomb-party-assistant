@@ -16,6 +16,13 @@ import theme.PastelGreen
 import theme.PastelRed
 import theme.PastelYellow
 
+/**
+ * Renders a Material chip.
+ *
+ * @param color The background color of the chip.
+ * @param modifier The modifier.
+ * @param child The content of the chip.
+ */
 @Composable
 fun Chip(
     color: Color = Color.LightGray,
@@ -32,6 +39,11 @@ fun Chip(
     }
 }
 
+/**
+ * Renders a chip to display the connection status.
+ *
+ * @param state Current application state.
+ */
 @Composable
 fun ConnectionChip(state: AppState) {
     val chipColor = when (state) {

@@ -22,6 +22,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
+/**
+ * Renders a number picker.
+ *
+ * @param current The current value.
+ * @param max The maximum number.
+ * @param min The minimum number. Defaults to zero.
+ * @param onChanged Callback when the current value needs to be changed.
+ * @param modifier The modifier.
+ */
 @Composable
 fun NumberPicker(
     current: Int?,
