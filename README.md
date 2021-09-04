@@ -18,5 +18,15 @@ realtime. This application is built using desktop compose.
 
 ## Features
 
-- If you prefer a shorter answer, you can reduce the maximum suggested word length
-- You can enable the settings to automatically copies the first suggested word to your clipboard
+### Realtime Word Suggestion
+
+The app gives you suggestion on what words you can enter for the given prompt in realtime. If you prefer a shorter word,
+you can reduce the maximum suggested word length.
+
+Win easily by setting the word length to a low value, or win with honor by setting the word length to a high value. The
+choice is yours.
+
+### Automatically Copy to Clipboard
+
+Don't feel like typing in the answer? You can enable the settings to automatically copy the first suggested word to your
+clipboard.
