@@ -21,6 +21,14 @@ import org.openqa.selenium.TimeoutException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
+/**
+ * The app header when the app is in disconnected state.
+ *
+ * @param state Current app state.
+ * @param onRoomIdChange Called when the room ID needs to change.
+ * @param onConnect Called when the user wants to connect to a room.
+ * @param modifier The modifier.
+ */
 @Composable
 fun DisconnectedHeader(
     state: AppState.Disconnected,
@@ -62,11 +70,24 @@ fun DisconnectedHeader(
     }
 }
 
+/**
+ * The app header when the app is in connecting state.
+ *
+ * @param roomId The room ID the app is connecting to.
+ * @param modifier The modifier.
+ */
 @Composable
 fun ConnectingHeader(roomId: String, modifier: Modifier = Modifier) {
     RoomId(roomId, modifier)
 }
 
+/**
+ * The app header when the app is in connected state.
+ *
+ * @param roomId The room ID it is connected to.
+ * @param onDisconnect Called when the user wants to disconnect.
+ * @param modifier The modifier.
+ */
 @Composable
 fun ConnectedHeader(
     roomId: String,
@@ -84,6 +105,14 @@ fun ConnectedHeader(
     }
 }
 
+/**
+ * Renders the header of the application.
+ *
+ * @param state Current app state.
+ * @param onChange Called when the app state needs to change.
+ * @param onConnect Called when the user wants to connect to a room.
+ * @param modifier The modifier.
+ */
 @Composable
 fun AppHeader(
     state: AppState,
@@ -109,6 +138,11 @@ fun AppHeader(
     }
 }
 
+/**
+ * The answer section when the app is in disconnected state.
+ *
+ * @param modifier The modifier.
+ */
 @Composable
 fun DisconnectedAnswerSection(modifier: Modifier = Modifier) = Column(
     horizontalAlignment = Alignment.CenterHorizontally,
@@ -126,6 +160,11 @@ fun DisconnectedAnswerSection(modifier: Modifier = Modifier) = Column(
     )
 }
 
+/**
+ * The answer section when the app is in connecting state.
+ *
+ * @param modifier The modifier.
+ */
 @Composable
 fun ConnectingAnswerSection(modifier: Modifier = Modifier) =
     Column(
@@ -138,6 +177,14 @@ fun ConnectingAnswerSection(modifier: Modifier = Modifier) =
         Text("Connecting to the room...")
     }
 
+/**
+ * Renders the answer section.
+ *
+ * @param appState Current app state.
+ * @param settingsState Current settings state.
+ * @param wordsManager Words manager.
+ * @param modifier The modifier.
+ */
 @Composable
 fun AnswersSection(
     appState: AppState,
@@ -165,7 +212,7 @@ fun AnswersSection(
             Answers(
                 answers = answers,
                 modifier = modifier,
-                cellSize = if ((settingsState.maxWordLength ?: Int.MAX_VALUE) > 10) {
+                minCellSize = if ((settingsState.maxWordLength ?: Int.MAX_VALUE) > 10) {
                     200.dp
                 } else {
                     150.dp
@@ -175,6 +222,13 @@ fun AnswersSection(
     }
 }
 
+/**
+ * Renders the application.
+ *
+ * @param driverManager Web driver manager.
+ * @param wordsManager Words manager.
+ * @param scaffoldState Scaffold state.
+ */
 @Composable
 fun AppContent(
     driverManager: ChromeDriverManager,

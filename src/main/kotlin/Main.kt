@@ -1,6 +1,8 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
@@ -10,8 +12,6 @@ import manager.ChromeDriverManager
 import manager.WordListManager
 import pages.AppContent
 import theme.AppTheme
-import theme.DarkColors
-import theme.LightColors
 
 /** The chrome driver executable file name. */
 const val DRIVER_EXE_NAME = "chromedriver.exe"

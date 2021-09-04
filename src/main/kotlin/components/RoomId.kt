@@ -12,6 +12,12 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 
+/**
+ * Renders the room ID indicator.
+ *
+ * @param id The room ID.
+ * @param modifier The modifier.
+ */
 @Composable
 fun RoomId(id: String, modifier: Modifier = Modifier) {
     Row(modifier = modifier) {
