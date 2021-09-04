@@ -1,6 +1,5 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
@@ -10,10 +9,14 @@ import extension.asResourceFile
 import manager.ChromeDriverManager
 import manager.WordListManager
 import pages.AppContent
+import theme.AppTheme
 import theme.DarkColors
 import theme.LightColors
 
+/** The chrome driver executable file name. */
 const val DRIVER_EXE_NAME = "chromedriver.exe"
+
+/** The word list text file name. */
 const val WORD_LIST_FILE_NAME = "words.txt"
 
 fun main() {
@@ -52,9 +55,7 @@ fun main() {
             onCloseRequest = ::exitApplication,
             title = "Bomb Party Assistant"
         ) {
-            MaterialTheme(
-                colors = if (isSystemInDarkTheme()) DarkColors else LightColors
-            ) {
+            AppTheme {
                 Scaffold(
                     scaffoldState = scaffoldState,
                     topBar = {
