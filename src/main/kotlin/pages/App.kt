@@ -17,6 +17,7 @@ import manager.ChromeDriverManager
 import manager.WordListManager
 import model.AppState
 import model.SettingsState
+import org.openqa.selenium.SessionNotCreatedException
 import org.openqa.selenium.TimeoutException
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
@@ -31,26 +32,18 @@ import java.awt.datatransfer.StringSelection
  */
 @Composable
 fun DisconnectedHeader(
-    state: AppState.Disconnected,
-    onRoomIdChange: (String) -> Unit,
-    onConnect: () -> Unit,
-    modifier: Modifier = Modifier
+    state: AppState.Disconnected, onRoomIdChange: (String) -> Unit, onConnect: () -> Unit, modifier: Modifier = Modifier
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
+        verticalAlignment = Alignment.CenterVertically, modifier = modifier
     ) {
         val isTextFieldError = state.editingRoomId.isNotEmpty() && !state.roomIdValid
 
         Column(modifier = Modifier.weight(1f)) {
             OutlinedTextField(
-                value = state.editingRoomId,
-                onValueChange = onRoomIdChange,
-                label = {
+                value = state.editingRoomId, onValueChange = onRoomIdChange, label = {
                     Text("Room ID")
-                },
-                isError = isTextFieldError,
-                modifier = Modifier.fillMaxWidth()
+                }, isError = isTextFieldError, modifier = Modifier.fillMaxWidth()
             )
 
             if (isTextFieldError) {
@@ -90,13 +83,10 @@ fun ConnectingHeader(roomId: String, modifier: Modifier = Modifier) {
  */
 @Composable
 fun ConnectedHeader(
-    roomId: String,
-    onDisconnect: () -> Unit,
-    modifier: Modifier = Modifier
+    roomId: String, onDisconnect: () -> Unit, modifier: Modifier = Modifier
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = modifier
+        verticalAlignment = Alignment.CenterVertically, modifier = modifier
     ) {
         RoomId(roomId, Modifier.weight(1f))
         TextButton(onClick = onDisconnect) {
@@ -115,25 +105,16 @@ fun ConnectedHeader(
  */
 @Composable
 fun AppHeader(
-    state: AppState,
-    onChange: (AppState) -> Unit,
-    onConnect: (Boolean) -> Unit,
-    modifier: Modifier = Modifier
+    state: AppState, onChange: (AppState) -> Unit, onConnect: (Boolean) -> Unit, modifier: Modifier = Modifier
 ) {
     when (state) {
-        is AppState.Disconnected -> DisconnectedHeader(
-            state,
-            onRoomIdChange = {
-                onChange(state.copy(editingRoomId = it.take(4)))
-            },
-            onConnect = { onConnect(true) },
-            modifier = modifier
+        is AppState.Disconnected -> DisconnectedHeader(state, onRoomIdChange = {
+            onChange(state.copy(editingRoomId = it.take(4)))
+        }, onConnect = { onConnect(true) }, modifier = modifier
         )
         is AppState.Connecting -> ConnectingHeader(state.roomId, modifier)
         is AppState.Connected -> ConnectedHeader(
-            roomId = state.roomId,
-            onDisconnect = { onConnect(false) },
-            modifier = modifier
+            roomId = state.roomId, onDisconnect = { onConnect(false) }, modifier = modifier
         )
     }
 }
@@ -145,18 +126,13 @@ fun AppHeader(
  */
 @Composable
 fun DisconnectedAnswerSection(modifier: Modifier = Modifier) = Column(
-    horizontalAlignment = Alignment.CenterHorizontally,
-    modifier = modifier,
-    verticalArrangement = Arrangement.Center
+    horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier, verticalArrangement = Arrangement.Center
 ) {
     Text(
-        text = "Connect to a Room to Get Started",
-        style = MaterialTheme.typography.h6,
-        textAlign = TextAlign.Center
+        text = "Connect to a Room to Get Started", style = MaterialTheme.typography.h6, textAlign = TextAlign.Center
     )
     Text(
-        text = "Enter your game’s 4 letter room ID and click the connect button.",
-        textAlign = TextAlign.Center
+        text = "Enter your game’s 4 letter room ID and click the connect button.", textAlign = TextAlign.Center
     )
 }
 
@@ -166,16 +142,13 @@ fun DisconnectedAnswerSection(modifier: Modifier = Modifier) = Column(
  * @param modifier The modifier.
  */
 @Composable
-fun ConnectingAnswerSection(modifier: Modifier = Modifier) =
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier
-    ) {
-        CircularProgressIndicator()
-        Spacer(Modifier.height(8.dp))
-        Text("Connecting to the room...")
-    }
+fun ConnectingAnswerSection(modifier: Modifier = Modifier) = Column(
+    horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center, modifier = modifier
+) {
+    CircularProgressIndicator()
+    Spacer(Modifier.height(8.dp))
+    Text("Connecting to the room...")
+}
 
 /**
  * Renders the answer section.
@@ -187,18 +160,14 @@ fun ConnectingAnswerSection(modifier: Modifier = Modifier) =
  */
 @Composable
 fun AnswersSection(
-    appState: AppState,
-    settingsState: SettingsState,
-    wordsManager: WordListManager,
-    modifier: Modifier = Modifier
+    appState: AppState, settingsState: SettingsState, wordsManager: WordListManager, modifier: Modifier = Modifier
 ) {
     when (appState) {
         is AppState.Disconnected -> DisconnectedAnswerSection(modifier)
         is AppState.Connecting -> ConnectingAnswerSection(modifier)
         is AppState.Connected -> {
-            val answers = wordsManager
-                .queryWords(appState.prompt, settingsState.maxWordLength ?: Int.MAX_VALUE)
-                .shuffled()
+            val answers =
+                wordsManager.queryWords(appState.prompt, settingsState.maxWordLength ?: Int.MAX_VALUE).shuffled()
 
             // Copy to clipboard
             if (settingsState.alwaysCopyFirstItemToClip) {
@@ -231,9 +200,7 @@ fun AnswersSection(
  */
 @Composable
 fun AppContent(
-    driverManager: ChromeDriverManager,
-    wordsManager: WordListManager,
-    scaffoldState: ScaffoldState
+    driverManager: ChromeDriverManager, wordsManager: WordListManager, scaffoldState: ScaffoldState
 ) {
     val scope = rememberCoroutineScope()
 
@@ -259,12 +226,17 @@ fun AppContent(
                 syllablesFlow.distinctUntilChanged().catch { error ->
                     println(error)
 
-                    if (error is TimeoutException) {
-                        scaffoldState.snackbarHostState.showSnackbar(
-                            message = "Timeout! Ensure that the room id is correct and you have stable connection.",
-                            actionLabel = "OK"
-                        )
+                    val message = when (error) {
+                        is TimeoutException -> "Request timeout! Ensure that the room id is correct and you have stable connection."
+                        is SessionNotCreatedException -> "Failed to create session! Try replacing the chrome driver that matches your OS and Google Chrome version."
+                        else -> error.localizedMessage
                     }
+
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = message,
+                        actionLabel = "OK",
+                        duration = SnackbarDuration.Long,
+                    )
 
                     appState = AppState.Disconnected(roomId)
 
@@ -284,8 +256,7 @@ fun AppContent(
 
     Column(modifier = Modifier.padding(16.dp).fillMaxHeight()) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            AppHeader(
-                state = appState,
+            AppHeader(state = appState,
                 modifier = Modifier.weight(1f),
                 onChange = { appState = it },
                 onConnect = { toConnect ->
@@ -296,8 +267,7 @@ fun AppContent(
                     } else {
                         appState = AppState.Disconnected()
                     }
-                }
-            )
+                })
             Spacer(Modifier.width(16.dp))
             ConnectionChip(appState)
         }
@@ -310,9 +280,7 @@ fun AppContent(
             PromptBox(appState.prompt, modifier = Modifier.padding(16.dp))
             Divider(modifier = Modifier.padding(vertical = 4.dp).height(80.dp).width(1.dp))
             Settings(
-                settings = settingsState,
-                onChanged = { settingsState = it },
-                modifier = Modifier.padding(start = 16.dp)
+                settings = settingsState, onChanged = { settingsState = it }, modifier = Modifier.padding(start = 16.dp)
             )
         }
 

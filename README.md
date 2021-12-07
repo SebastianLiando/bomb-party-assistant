@@ -13,8 +13,26 @@ realtime. This application is built using desktop compose.
 
 ## Requirements
 
-- Google Chrome version 92 and above
 - Java JDK 12
+
+## Getting Started
+
+### Add the Required Driver
+
+1. Check your Google Chrome version
+2. Download the driver from [here](https://chromedriver.chromium.org/home). Make sure it matches your Google Chrome
+   version and your OS.
+3. Name the driver "chromedriver.exe", and place it in `/src/main/resources`.
+
+### Run the App
+
+Run the following command in the root project directory.
+
+```
+gradlew run
+```
+
+If it does not work, try to run the project from [IntelliJ IDEA](https://www.jetbrains.com/idea/).
 
 ## Features
 

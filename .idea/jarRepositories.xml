@@ -17,13 +17,8 @@
       <option name="url" value="https://repo.maven.apache.org/maven2/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="BintrayJCenter" />
-      <option name="name" value="BintrayJCenter" />
-      <option name="url" value="https://jcenter.bintray.com/" />
-    </remote-repository>
-    <remote-repository>
-      <option name="id" value="maven" />
-      <option name="name" value="maven" />
+      <option name="id" value="Compose for Desktop DEV" />
+      <option name="name" value="Compose for Desktop DEV" />
       <option name="url" value="https://maven.pkg.jetbrains.space/public/p/compose/dev" />
     </remote-repository>
     <remote-repository>
